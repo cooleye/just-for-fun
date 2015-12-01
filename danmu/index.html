@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
+    <script src="http://libs.useso.com/js/zepto/1.1.3/zepto.min.js"></script>
+    <script src="http://libs.useso.com/js/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <div class='toolbar'>
+        <input type='text' id='nameInput' placeholder='输入一个用户名...'>
+    </div>
+
+    <div class="texts" id="texts">
+    </div>
+
+    <div class="controll">
+        <input type="text" class="input_class" id="input_class" size="50" maxlength="50">
+        <div class="sendbtn" id="sendbtn"> 发 送</div>
+    </div>
+
+</div>
+
+<script>
+
+    var messagesRef = new Wilddog('https://mydanmu.wilddogio.com/msg/demo');
+
+    // REGISTER
+    var messageField = $('#input_class');
+    var nameField = $('#nameInput');
+    var messageList = $('#texts');
+
+    // 监听键盘事件
+    messageField.keypress(function (e) {
+        if (e.keyCode == 13) {
+            sendMassage();
+        }
+    });
+
+    // 每来一条消息都触发回调函数
+    messagesRef.limitToLast(10).on('child_added', function (snapshot) {
+        //获取数据
+        var data = snapshot.val();
+        var username = data.name || "anonymous";
+        var message = data.text;
+
+
+        getMassage(username,message);
+    });
+
+    $("#sendbtn").on('tap click', function () {
+        sendMassage();
+    })
+
+
+    function sendMassage(){
+        var username = nameField.val();
+        var message = messageField.val();
+
+        //把数据保存到Wilddog，并同步到云端
+        messagesRef.push({name:username, text:message});
+        messageField.val('');
+    }
+
+
+
+    function getMassage(name,text){
+
+        var ranstr = randomString();
+        var id = 'input_text_' + ranstr;
+        var str = '<p class="input_text" id="'+id+'">'+name+':' +text+'</p>';
+
+        var color = getRandomColor();
+
+        messageList.append(str);
+
+        var top = (Math.random()*80) + '%';
+
+        $("#"+id+"").css({'color':color,'top':top});
+
+        $("#"+id+"").animate({'left':'-100%'},20000,'linear');
+    }
+
+    function getRandomColor(){
+        return '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6);
+    }
+
+    function randomString(len) {
+        len = len || 5;
+        var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+        var maxPos = $chars.length;
+        var pwd = '';
+        for (i = 0; i < len; i++) {
+            pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+        }
+        return pwd;
+    }
+</script>
+</body>
+</html>

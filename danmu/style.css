@@ -1,0 +1,99 @@
+body,div{margin:0;padding:0}
+body,html{height:100%}
+body{background:#000;
+    overflow: hidden
+}
+
+*{outline:none;border: 0;}
+.container{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+
+    overflow: hidden;
+}
+
+
+.controll{
+    width: 100%;height: 70px;
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    z-index: 2;
+    background: rgba(250,250,250,0.2);
+}
+.input_class{
+    background: rgba(250,250,250,1);
+    width: 75%;
+    height: 60px;
+    font-size: 2em;
+    text-align: left;
+    float: left;
+    margin-top: 2px;
+    /*border: solid 1px #ddd;*/
+    border-top: solid 1px #cfcfcf;
+    border-bottom: solid 1px #cfcfcf;
+    border-radius: 0px;
+
+}
+
+.sendbtn{
+    background: rgb(232, 232, 232);
+    width: 25%;
+    height: 60px;
+    font-size: 24px;
+    font-family: '黑体';
+    text-align: left;
+    float: left;
+    margin-top: 2px;
+    border: solid 0px #ddd;
+    border-top: solid 1px #cfcfcf;
+    border-bottom: solid 1px #cfcfcf;
+    text-align: center;
+    border-radius: 0px;
+    line-height: 2em
+
+}
+
+.texts{
+    width: 100%;
+    height: 100%;
+    background: #eafaf8;
+    opacity: 1;
+    /*background: url("mv.jpg") no-repeat;*/
+    /*background-size: 100% 100%;*/
+    font-family: '黑体';
+    overflow: hidden;
+}
+
+.scroll_cover{
+    width: 100%;
+}
+
+.input_text{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    left: 100%;
+    top: 0;
+    font-size: 2em;
+    display:block;/*内联对象需加*/
+    word-break:keep-all; /* 不换行 */
+    white-space:nowrap; /* 不换行 */
+    overflow:hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+    /*text-overflow:ellipsis; /!* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使*/
+}
+
+.toolbar{
+    width: 100%;
+    height: 10%;
+    background: #006600;
+}
+.toolbar input{
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    text-align: center;
+    border-bottom: solid 1px #cfcfcf;
+}
